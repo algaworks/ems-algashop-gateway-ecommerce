@@ -13,7 +13,7 @@ public class GatewayEcommerceSecurityConfig {
 	SecurityWebFilterChain defaultSecurityFilterChain(ServerHttpSecurity http) {
 		http.csrf(ServerHttpSecurity.CsrfSpec::disable)
 				.authorizeExchange(authorize -> authorize
-						.pathMatchers("/actuator/health").permitAll()
+						.pathMatchers("/actuator/**").permitAll()
 						.pathMatchers("/api/**").authenticated()
 						.anyExchange().denyAll()
 				)
