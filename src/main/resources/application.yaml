@@ -8,6 +8,12 @@ logging:
 spring:
   application:
     name: gateway-ecommerce
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: algashop
+      database: 3
   security:
     oauth2:
       resourceserver:
@@ -75,6 +81,13 @@ spring:
                 - Method=GET,POST,PUT,DELETE,OPTIONS
               filters:
                 - LocalResponseCache=5m,30MB
+                - name: RequestRateLimiter
+                  args:
+                    redis-rate-limiter:
+                      replenishRate: 50
+                      burstCapacity: 200
+                      requestedTokens: 1
+                    key-resolver: "#{@rateLimitKeyResolver}"
             - id: product-catalog-test-route
               uri: lb://product-catalog
               predicates:
