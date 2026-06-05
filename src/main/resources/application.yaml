@@ -47,7 +47,7 @@ spring:
           globalcors:
             cors-configurations:
               '[/**]':
-                  allowedOrigins: http://localhost:4200
+                  allowedOrigins: http://admin.algashop.local:4200
                   allowedHeaders: '*'
                   allowedMethods:
                     - GET
